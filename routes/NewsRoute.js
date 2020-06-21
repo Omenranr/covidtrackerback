@@ -4,13 +4,17 @@ const config = require('config')
 const NewsAPI = require('newsapi')
 const newsapi = new NewsAPI(config.get('newsApiKey'))
 
-router.get('/', JWTCtrl.verifyToken, (req, res, next)=>{
-    CampanionCtrl.selectAll(req, res, next)
-    .then( data =>{
-        res.json(data);
-    })
-    .catch( err =>{ res.json(err)});
-})
+// "country=ma&q=covid&from=from=2020-05-20&sortBy=publishedAt&apiKey="+apiKey
 
+router.get('/byCountry', (req, res, next) => {
+    newsapi.v2.topHeadlines({
+      q: req.query.q,
+      country: req.query.country,
+      from: "2020-05-20",
+      sortBy: "publishedAt",
+    }).then(response => {
+      res.status(200).json(response)
+    })    
+})
 
 module.exports = router

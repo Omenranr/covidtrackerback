@@ -2,7 +2,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 
 // CRUD of the apps
-const ObjectiveRoute = require('./routes/NewsRoute')
+const NewsRoute = require('./routes/NewsRoute')
 
 const app = express();
 app.use(bodyparser.json());
@@ -18,8 +18,8 @@ app.use((req, res, next) => {
     next()
 })
 
-//other routs
-app.use('/news', ObjectiveRoute)
+//Routes
+app.use('/news', NewsRoute)
 
 app.use((req, res, next) => {
     const error = new Error('Not found')
