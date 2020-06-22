@@ -17,4 +17,8 @@ router.get('/byCountry', (req, res, next) => {
     })   
 })
 
+router.get('/test', (req, res, next) => {
+    res.json("test") 
+})
+
 module.exports = router
